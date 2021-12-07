@@ -1,0 +1,53 @@
+<section>
+<% include ./partials/messages %>
+    <div class="row mt-3 row justify-content-end">
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Dashboard</div>
+            <div class="card-body">
+              <h4 class="card-title">Welcome </h4>
+              <p class="card-text">Create products here and view others products.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+
+        <form method="POST" action="/products/update/<%= product.id %>" enctype="multipart/form-data">
+        
+                <legend>EDIT PRODUCT</legend>
+
+                <div class="form-group">
+                    <label for="image" class="form-label mt-4">Choose Image For Your Product</label>
+                    <input class="form-control" type="file" id="image" name="image" value="<%= product.image %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="product_name" class="form-label mt-4">Product Name</label>
+                    <input type="text" class="form-control" id="product_name" name="product_name" value="<%= product.name %>" aria-describedby="product_name" placeholder="Enter Product Name">
+                    <small id="product_name" class="form-text text-muted">Choose a fancy name.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="location" class="form-label mt-4">Product Location</label>
+                    <input type="text" class="form-control" id="location" name="location" value="<%= product.location %>" aria-describedby="location" placeholder="Enter Product Locatio">
+                    <small id="location" class="form-text text-muted">Valid locations only please.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="geo_details" class="form-label mt-4">Product Geo Details</label>
+                    <input type="text" class="form-control" id="geo_details" name="geo_details" value="<%= product.geo_details %>" aria-describedby="geo_details" placeholder="Enter Product Geo details">
+                    <small id="geo_details" class="form-text text-muted">Valid locations only please.</small>
+                </div>
+               
+                <div class=" pt-3 float-end">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            
+        </form>
+
+
+    </div>
+</section>
+
+<!-- <a href="/users/logout" class="btn btn-secondary">Logout</a> -->

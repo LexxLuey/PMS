@@ -1,0 +1,2 @@
+
+process.env.GOOGLE_API_KEY='AIzaSyAn6kt2uVcLjL71xdAFz7gtNmrhHOPukZk'

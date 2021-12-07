@@ -1,0 +1,89 @@
+<section>
+<% include ./partials/messages %>
+
+    <div class="row">       
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-primary">
+                  <th scope="col"></th>
+
+                </tr>
+              </thead>
+        </table>
+    </div>
+</section>
+
+<section>
+    <div class=".container-sm ">
+        <div class="md:w-1/2 md:mx-auto">
+            <div class="flex flex-col break-words bg-white border border-2 rounded shadow-md">
+                <div class="row">
+                    <div class="col ">
+                        <div class="card text-white bg-primary mb-3">
+                            <h3 class="card-header"><%= product.name%></h3>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= product.location%></h5>
+                                <h6 class="card-subtitle text-muted"><%= product.user%></h6>
+                            </div>
+                            <div class="col-md-3">
+                                <img src="/images/<%= product.image%>" class="d-block user-select-none card-img-top" width="100%" height="200" alt="...">
+                            </div>
+                            
+                            <ul class="list-group list-group-flush">
+                            <% if(comments.length){for(var i = 0; i< comments.length; i++) {%>
+                                <li class="list-group-item">
+                                    <figure class="text-end">
+                                        <blockquote class="blockquote">
+                                            <p class="mb-0"><%= comments[i].comment%></p>
+                                        </blockquote>
+                                        <figcaption class="blockquote-footer pt-3">
+                                            <cite title="Source Title"><%= comments[i].user%></cite>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                                    <% }}else{ %>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <p>Be the first to review this product</p>
+                                </li>
+                                    <% } %>
+                                
+                            </ul>
+                            <div class="card-body">
+                                <form action="/products/comment/<%= product.id%>" method="post">
+                                    <div class="form-group pb-4">
+                                        <label for="comment" class="form-label mt-1">Make a comment about Product </label>
+                                        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-success">Comment</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+    <script>
+        const options = {
+            componentRestrictions: { country: "ng" },
+            fields: ["address_components", "icon", "name"],
+            strictBounds: false,
+            types: ["address"],
+        };
+
+        var input = document.getElementById('autocomplete');
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function(){
+            var place = autocomplete.getPlace();
+        })
+
+        function updateRange(val) {
+          document.getElementById('km_range').innerText=val; 
+        }
+    </script>
+
+<!-- <a href="/users/logout" class="btn btn-secondary">Logout</a> -->

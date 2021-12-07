@@ -1,0 +1,113 @@
+<section>
+<% include ./partials/messages %>
+    <div class="row mt-3 row justify-content-end">
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Dashboard</div>
+            <div class="card-body">
+              <h4 class="card-title">Welcome <%= user.name %></h4>
+              <p class="card-text">Create products here and view others products.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+    
+        <div class="col align-self-start pt-4 pb-4">
+            <!-- <input type="text" id="autocomplete"/>  -->
+            <div class="row justify-content-end">
+                <form action="/dashboard" method="GET">       
+                    <div class="col-3 ">
+                    
+                        <div class="row">
+                            <div class="col" >
+                                <label for="reach" class="form-label">Show products within this range in KM</label>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col-6 pt-3"> 
+                        <div class="row justify-content-start">
+                            <div class="col-6">                
+                                <input type="range" class="form-range" id="reach" name="reach" value="50" min="1" max="100" onchange="updateRange(this.value);">
+                             </div>
+                            <div class="col-sm-3">    
+                                <button type="submit" class="btn btn-outline-primary btn-lg" id="km_range"> <h2><%= reach.value %></h2> </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-primary">
+                  <th scope="col"></th>
+
+                </tr>
+              </thead>
+        </table>
+    </div>
+</section>
+
+<section>
+    <div class="row">
+        <div class="row row-cols-3 row-cols-lg-3 g-2 g-lg-4">
+         <% if(products.length){for(var i = 0; i< products.length; i++) {%>
+            <div class="col-md-3 ">
+                <div class="card text-white bg-primary mb-3">
+                    <h3 class="card-header"><%= products[i].name%></h3>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= products[i].location%></h5>
+                        <h6 class="card-subtitle text-muted"><%= products[i].user%></h6>
+                    </div>
+                    <img src="/images/<%= products[i].image%>" class="d-block user-select-none card-img-top" width="100%" height="200" alt="...">
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="/products/product/<%= products[i].id%>" class="card-link text-decoration-none">Product Comments</a>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <form action="/products/comment/<%= products[i].id%>" method="post">
+                            <div class="form-group pb-4">
+                                <label for="comment" class="form-label mt-1">Make a comment about Product </label>
+                                <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-outline-success">Comment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <% }}else{ %>
+        <h1>No Products For You </h1>
+        <% } %>
+        </div>
+    </div>
+
+</section>
+
+
+    <script>
+        const options = {
+            componentRestrictions: { country: "ng" },
+            fields: ["address_components", "icon", "name"],
+            strictBounds: false,
+            types: ["address"],
+        };
+
+        var input = document.getElementById('autocomplete');
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function(){
+            var place = autocomplete.getPlace();
+        })
+
+        function updateRange(val) {
+          document.getElementById('km_range').innerText=val; 
+        }
+    </script>
+
+<!-- <a href="/users/logout" class="btn btn-secondary">Logout</a> -->

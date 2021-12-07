@@ -1,0 +1,63 @@
+<% if(locals.errors){ %> <% errors.forEach(function(error) { %>
+<div class="toast show text-white bg-warning" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <strong class="me-auto">Error</strong>
+    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="toast-body">
+    <%= error.msg %> 
+  </div>
+</div>
+<% }); %> <% } %> <% if(success_msg != ''){ %>
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <strong class="me-auto">Success</strong>
+    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="toast-body">
+    <%= success_msg %> 
+  </div>
+</div>
+
+
+<% } %> <% if(error_msg != ''){ %>
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <strong class="me-auto">Error</strong>
+    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="toast-body">
+    <%= error_msg %>.
+  </div>
+</div>
+<% } %> <% if(error != ''){ %>
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <strong class="me-auto">Error</strong>
+    <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="toast-body">
+    <%= error %>.
+  </div>
+</div>
+<% } %>
+
+
+
+
+
+
+  
+
+
+
+
+

@@ -1,0 +1,57 @@
+<section>
+<% include ./partials/messages %>
+    <div class="row mt-3 row justify-content-end">
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Dashboard</div>
+            <div class="card-body">
+              <h4 class="card-title">Welcome <%= user.name %></h4>
+              <p class="card-text">Create products here and view others products.</p>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="col align-self-start pt-3 pb-4">
+            <a class="btn btn-outline-primary" href="../products/create">Create New Product</a>
+        </div>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr class="table-primary">
+                  <th scope="col">No</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Location </th>
+                  <th scope="col">Actions </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% if(products.length){for(var i = 0; i< products.length; i++) {%>
+                <tr class="table-light">
+                    <th scope="row">
+                    <%= (i+1) %>
+                    </th>
+                    <td>
+                    <%= products[i].name%>
+                    </td>
+                    <td>
+                    <%= products[i].location%>
+                    </td>
+                    <td> 
+                        <a class="btn btn-outline-info edit" href="../products/product/<%= products[i].id%>">View</a>
+                        <a class="btn btn-outline-success edit" href="../products/update/<%= products[i].id%>">Edit</a>
+                        <a class="btn btn-outline-danger delete" href="../products/delete/<%= products[i].id%>">delete</a>
+                    </td>
+                </tr>
+                <% }}else{ %>
+                <tr>
+                    <td colspan="3">No Products</td>
+                </tr>
+                <% } %>
+              </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- <a href="/users/logout" class="btn btn-secondary">Logout</a> -->
