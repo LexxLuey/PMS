@@ -264,25 +264,34 @@ router.post('/comment/:id', async function(req, res) {
         let ownerProduct = {};
         ownerProduct = await User.find({ "name": prod.user });
         // console.log('Got user: ', ownerProduct[0].email)
-
+        var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
         const Email = require('email-templates');
         const email = new Email({
             message: {
-                from: 'tradedepot@gmail.com'
+                from: 'biggestluey@gmail.com'
             },
             send: true,
             transport: {
-                host: 'smtp.mailtrap.io',
+                service: 'gmail',
+                auth: {
+                    type: 'OAuth2',
+                    user: process.env.MAIL_USERNAME,
+                    pass: process.env.MAIL_PASSWORD,
+                    clientId: process.env.OAUTH_CLIENTID,
+                    clientSecret: process.env.OAUTH_CLIENT_SECRET,
+                    refreshToken: process.env.OAUTH_REFRESH_TOKEN
+                }
+                /* host: 'smtp.mailtrap.io',
                 port: 2525,
                 ssl: false,
                 tls: true,
                 auth: {
                     user: '712f61f1f9d44b', // your Mailtrap username
                     pass: 'f7790be06598f0' //your Mailtrap password
-                }
+                } */
             }
         });
-        var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+        
         const people = [
             {name: ownerProduct[0].name, product: prod.name, user: req.user.name, url: fullUrl},
         ];
@@ -292,7 +301,7 @@ router.post('/comment/:id', async function(req, res) {
         .send({
             template: 'comment',
             message: {
-            to: ownerProduct[0].email
+                to: ownerProduct[0].email
             },
             locals: person
         })

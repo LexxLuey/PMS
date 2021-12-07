@@ -8,7 +8,7 @@ const path = require('path');
 const bodyParser= require('body-parser')
 // const functions = require('firebase-functions');
 // const admin = require('firebase-admin');
-
+require('dotenv').config();
 const app = express();
 
 // Passport Config
