@@ -276,10 +276,10 @@ router.post('/comment/:id', async function(req, res) {
                 auth: {
                     type: 'OAuth2',
                     user: process.env.MAIL_USERNAME,
-                    pass: process.env.MAIL_PASSWORD,
-                    clientId: process.env.OAUTH_CLIENTID,
-                    clientSecret: process.env.OAUTH_CLIENT_SECRET,
-                    refreshToken: process.env.OAUTH_REFRESH_TOKEN
+                    // clientId: process.env.OAUTH_CLIENTID,
+                    // clientSecret: process.env.OAUTH_CLIENT_SECRET,
+                    // refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+                    accessToken: process.env.ACCESS_TOKEN,
                 }
                 /* host: 'smtp.mailtrap.io',
                 port: 2525,
