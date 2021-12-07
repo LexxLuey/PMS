@@ -1,8 +1,8 @@
-# Node.js & Passport Login
+# Node.js Product Management System With GeoCoding
 
-This is a user login and registration app using Node.js, Express, Passport, Mongoose, EJS and some other packages.
+This is a user login, registration, CRUD and geolocation app using Node.js, Express, Passport, Mongoose, EJS and some other packages.
 
-### Version: 2.0.0
+### Version: 1.0.0
 
 ### Usage
 
