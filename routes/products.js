@@ -48,7 +48,7 @@ router.get('/', ensureAuthenticated, async function(req, res) {
 
 
 // SHOW ADD USER FORM
-router.get('/create', function(req, res, next) {
+router.get('/create', ensureAuthenticated, function(req, res, next) {
     // render to views/user/add.ejs
     res.render('products-create', {
         user: req.user
@@ -57,7 +57,7 @@ router.get('/create', function(req, res, next) {
 
 
 // ADD NEW USER POST ACTION
-router.post('/adding', upload.single('image'), async function(req, res) {
+router.post('/adding', upload.single('image'), ensureAuthenticated, async function(req, res) {
     // console.log(req.body.product_name);
     // return res.status(200).send(JSON.stringify(req.body));  
     try {
@@ -120,7 +120,7 @@ router.post('/adding', upload.single('image'), async function(req, res) {
 })
 
 
-router.get('/product/:id', async function(req, res) {
+router.get('/product/:id', ensureAuthenticated, async function(req, res) {
 
     try {
         // get document
@@ -164,7 +164,7 @@ router.get('/product/:id', async function(req, res) {
 })
 
 
-router.get('/update/:id', async function(req, res) {
+router.get('/update/:id', ensureAuthenticated, async function(req, res) {
 
     try {
         // get document
@@ -191,7 +191,7 @@ router.get('/update/:id', async function(req, res) {
 })
 
 
-router.post('/update/:id', upload.single('image'), async function(req, res) {
+router.post('/update/:id', upload.single('image'), ensureAuthenticated, async function(req, res) {
     // console.log(req.body.product_name);
     // return res.status(200).send(JSON.stringify(req.body));  
     try {
@@ -230,7 +230,7 @@ router.post('/update/:id', upload.single('image'), async function(req, res) {
 
 })
 
-router.get('/delete/:id', async function(req, res) {
+router.get('/delete/:id', ensureAuthenticated, async function(req, res) {
     // get collection
     const product = await db.collection('products').doc(req.params.id).delete(); 
 
@@ -239,7 +239,7 @@ router.get('/delete/:id', async function(req, res) {
 });
 
 
-router.post('/comment/:id', async function(req, res) {
+router.post('/comment/:id', ensureAuthenticated, async function(req, res) {
 
     try {
         var comment = req.body.comment;
